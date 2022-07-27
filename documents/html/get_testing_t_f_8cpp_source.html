@@ -76,23 +76,41 @@ $(function() {
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;tuple&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">using</span> std::string;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_trading_bot.html">TradingBot</a> {</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="namespace_trading_bot.html#afbfc4531149e5689a8c38d5c72576a8a">   10</a></span>&#160;std::tuple&lt;string, string, string&gt; <a class="code" href="namespace_trading_bot.html#afbfc4531149e5689a8c38d5c72576a8a">getTestingTF</a>(<span class="keywordtype">string</span> date)</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">string</span> endDateTimeD1 = <span class="stringliteral">&quot;endDateTimeD1&quot;</span>;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">string</span> endDateTimePreScanner = <span class="stringliteral">&quot;endDateTimePreScanner&quot;</span>;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordtype">string</span> endDateTimeAskBid = <span class="stringliteral">&quot;endDateTimeAskBid&quot;</span>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">return</span> std::make_tuple(endDateTimeD1, endDateTimePreScanner, endDateTimeAskBid);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;} <span class="comment">// namespace TradingBot</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span> <span class="comment">// ss</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iomanip&gt;</span> <span class="comment">// std::get_time</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_trading_bot.html">TradingBot</a> {</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="namespace_trading_bot.html#a61fe25dc46a82e215864f409bbc5b0d6">   11</a></span>&#160;std::tuple&lt;time_t, time_t, time_t, time_t&gt; <a class="code" href="namespace_trading_bot.html#a61fe25dc46a82e215864f409bbc5b0d6">getTestingTF</a>(<span class="keywordtype">bool</span> dayLightSaving, std::string date)</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">struct </span>std::tm tm;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    std::istringstream ss(date);</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="comment">// ss &gt;&gt; std::get_time(&amp;tm, &quot;%H:%M:%S&quot;); // or just %T in this case</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    ss &gt;&gt; std::get_time(&amp;tm, <span class="stringliteral">&quot;%Y-%m-%d&quot;</span>);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    std::time_t timeD = mktime(&amp;tm);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    std::time_t usCheckPreChangeTime = timeD + 23 * 60 * 60 + 26 * 60;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    std::time_t usMarketOpenTime = timeD + 23 * 60 * 60 + 30 * 60;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    std::time_t endDateTimeD1, endDateTimePreScanner, endDateTimeAskBid;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">if</span>(dayLightSaving) {</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        endDateTimeD1 = usMarketOpenTime + 60;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        endDateTimePreScanner = timeD + 21 * 60 *60 + 56 * 60;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        endDateTimeAskBid = timeD + 10;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        endDateTimeD1 = timeD + 60;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        endDateTimePreScanner = timeD - 60 * 60 + 26 * 60;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        endDateTimeAskBid = timeD + 10;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">return</span> std::make_tuple(usCheckPreChangeTime, endDateTimeD1, endDateTimePreScanner, endDateTimeAskBid);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;}</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;} <span class="comment">// namespace TradingBot</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="anamespace_trading_bot_html"><div class="ttname"><a href="namespace_trading_bot.html">TradingBot</a></div><div class="ttdoc">C++ Template project definitions.</div><div class="ttdef"><b>Definition:</b> <a href="class_8h_source.html#l00012">class.h:12</a></div></div>
-<div class="ttc" id="anamespace_trading_bot_html_afbfc4531149e5689a8c38d5c72576a8a"><div class="ttname"><a href="namespace_trading_bot.html#afbfc4531149e5689a8c38d5c72576a8a">TradingBot::getTestingTF</a></div><div class="ttdeci">std::tuple&lt; string, string, string &gt; getTestingTF(string date)</div><div class="ttdoc">Template function.</div><div class="ttdef"><b>Definition:</b> <a href="get_testing_t_f_8cpp_source.html#l00010">getTestingTF.cpp:10</a></div></div>
 <div class="ttc" id="aget_testing_t_f_8h_html"><div class="ttname"><a href="get_testing_t_f_8h.html">getTestingTF.h</a></div></div>
+<div class="ttc" id="anamespace_trading_bot_html_a61fe25dc46a82e215864f409bbc5b0d6"><div class="ttname"><a href="namespace_trading_bot.html#a61fe25dc46a82e215864f409bbc5b0d6">TradingBot::getTestingTF</a></div><div class="ttdeci">std::tuple&lt; time_t, time_t, time_t, time_t &gt; getTestingTF(bool dayLightSaving, std::string date)</div><div class="ttdoc">Template function.</div><div class="ttdef"><b>Definition:</b> <a href="get_testing_t_f_8cpp_source.html#l00011">getTestingTF.cpp:11</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
