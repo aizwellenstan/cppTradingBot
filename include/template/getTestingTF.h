@@ -2,7 +2,6 @@
 #define TRADINGBOT_TEMPLATE_GETTESTINGTF_H
 #include <string>
 #include <tuple>
-using std::string;
 
 namespace TradingBot {
 
@@ -15,7 +14,7 @@ namespace TradingBot {
     \param date - Template function parameter
     \return Template function result
 */
-std::tuple<string, string, string> getTestingTF(string date);
+std::tuple<time_t, time_t, time_t, time_t> getTestingTF(bool dayLightSaving, std::string date);
 
 /*! \example template_function.cpp Template function example */
 
