@@ -75,18 +75,23 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_trading_bot.html">TradingBot</a> {</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;tuple&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">using</span> std::string;</div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="namespace_trading_bot.html#a6de8a8e018a90a1c46eddb9643096bed">    8</a></span>&#160;std::string <a class="code" href="namespace_trading_bot.html#a6de8a8e018a90a1c46eddb9643096bed">getTestingTF</a>(std::string date)</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keywordflow">return</span> date;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;}</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;} <span class="comment">// namespace TradingBot</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespace_trading_bot.html">TradingBot</a> {</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="namespace_trading_bot.html#afbfc4531149e5689a8c38d5c72576a8a">   10</a></span>&#160;std::tuple&lt;string, string, string&gt; <a class="code" href="namespace_trading_bot.html#afbfc4531149e5689a8c38d5c72576a8a">getTestingTF</a>(<span class="keywordtype">string</span> date)</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keywordtype">string</span> endDateTimeD1 = <span class="stringliteral">&quot;endDateTimeD1&quot;</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keywordtype">string</span> endDateTimePreScanner = <span class="stringliteral">&quot;endDateTimePreScanner&quot;</span>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordtype">string</span> endDateTimeAskBid = <span class="stringliteral">&quot;endDateTimeAskBid&quot;</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">return</span> std::make_tuple(endDateTimeD1, endDateTimePreScanner, endDateTimeAskBid);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;} <span class="comment">// namespace TradingBot</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="anamespace_trading_bot_html_a6de8a8e018a90a1c46eddb9643096bed"><div class="ttname"><a href="namespace_trading_bot.html#a6de8a8e018a90a1c46eddb9643096bed">TradingBot::getTestingTF</a></div><div class="ttdeci">std::string getTestingTF(std::string date)</div><div class="ttdoc">Template function.</div><div class="ttdef"><b>Definition:</b> <a href="get_testing_t_f_8cpp_source.html#l00008">getTestingTF.cpp:8</a></div></div>
 <div class="ttc" id="anamespace_trading_bot_html"><div class="ttname"><a href="namespace_trading_bot.html">TradingBot</a></div><div class="ttdoc">C++ Template project definitions.</div><div class="ttdef"><b>Definition:</b> <a href="class_8h_source.html#l00012">class.h:12</a></div></div>
+<div class="ttc" id="anamespace_trading_bot_html_afbfc4531149e5689a8c38d5c72576a8a"><div class="ttname"><a href="namespace_trading_bot.html#afbfc4531149e5689a8c38d5c72576a8a">TradingBot::getTestingTF</a></div><div class="ttdeci">std::tuple&lt; string, string, string &gt; getTestingTF(string date)</div><div class="ttdoc">Template function.</div><div class="ttdef"><b>Definition:</b> <a href="get_testing_t_f_8cpp_source.html#l00010">getTestingTF.cpp:10</a></div></div>
 <div class="ttc" id="aget_testing_t_f_8h_html"><div class="ttname"><a href="get_testing_t_f_8h.html">getTestingTF.h</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

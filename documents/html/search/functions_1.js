@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gettestingtf_31',['getTestingTF',['../namespace_trading_bot.html#a6de8a8e018a90a1c46eddb9643096bed',1,'TradingBot']]]
+  ['gettestingtf_31',['getTestingTF',['../namespace_trading_bot.html#afbfc4531149e5689a8c38d5c72576a8a',1,'TradingBot']]]
 ];
